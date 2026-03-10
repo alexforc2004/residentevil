@@ -1,0 +1,487 @@
+/* ========================================
+   EQUIPMENT LOADOUT - Technical Diagram Style
+   ======================================== */
+
+.outfit-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.outfit-viewer {
+  background: linear-gradient(160deg, #0a0a0f 0%, #12081a 50%, #0a0a0f 100%);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 1400px;
+  height: 90vh;
+  max-height: 900px;
+  position: relative;
+  border: 1px solid rgba(255, 20, 147, 0.25);
+  box-shadow: 
+    0 0 100px rgba(255, 20, 147, 0.1),
+    inset 0 0 100px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 20, 147, 0.1);
+  border: 1px solid rgba(255, 20, 147, 0.4);
+  color: #FF1493;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background: rgba(255, 20, 147, 0.3);
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+}
+
+/* ========== HEADER ========== */
+.outfit-header {
+  padding: 30px 40px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 20, 147, 0.15);
+  flex-shrink: 0;
+}
+
+.outfit-header h1 {
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.outfit-header h1 span {
+  color: var(--accent);
+}
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 12px;
+}
+
+.char-name {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 2px;
+}
+
+.version-tag {
+  padding: 5px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 1px;
+}
+
+.version-tag.re9 {
+  background: linear-gradient(135deg, rgba(255, 20, 147, 0.3), rgba(255, 20, 147, 0.1));
+  border-color: #FF1493;
+  color: #FF1493;
+  box-shadow: 0 0 20px rgba(255, 20, 147, 0.3);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 20, 147, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(255, 20, 147, 0.5); }
+}
+
+/* ========== DIAGRAM AREA ========== */
+.diagram-area {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Character Image */
+.outfit-image {
+  position: relative;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.outfit-image img {
+  height: 100%;
+  max-height: 600px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 30px rgba(255, 20, 147, 0.3));
+}
+
+.image-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.image-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 4px;
+  border-radius: 2px;
+}
+
+/* ========== ANNOTATIONS ========== */
+.annotation {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  z-index: 20;
+  max-width: 280px;
+}
+
+.annotation.right {
+  flex-direction: row;
+}
+
+.annotation.left {
+  flex-direction: row-reverse;
+}
+
+/* Annotation Line */
+.ann-line {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.annotation.right .ann-line {
+  flex-direction: row-reverse;
+}
+
+.annotation.left .ann-line {
+  flex-direction: row;
+}
+
+.line-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.line-bar {
+  width: 60px;
+  height: 2px;
+  flex-shrink: 0;
+}
+
+/* Annotation Box */
+.ann-box {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 16px;
+  backdrop-filter: blur(10px);
+}
+
+.annotation.right .ann-box {
+  border-left: 2px solid var(--accent);
+}
+
+.annotation.left .ann-box {
+  border-right: 2px solid var(--accent);
+  text-align: right;
+}
+
+.ann-box h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ann-box p {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 6px;
+  line-height: 1.4;
+}
+
+.ann-dims {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ========== HUD ELEMENTS ========== */
+.hud-corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--accent);
+  opacity: 0.4;
+}
+
+.hud-corner.tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+.hud-corner.tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+.hud-corner.bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+.hud-corner.br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.5;
+  animation: scan 4s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.5; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ========== FOOTER ========== */
+.outfit-footer {
+  padding: 15px 40px 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.footer-bar {
+  height: 1px;
+  margin-bottom: 15px;
+}
+
+.outfit-footer p {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  letter-spacing: 3px;
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+   ======================================== */
+@media (max-width: 1100px) {
+  .outfit-viewer {
+    max-width: 95%;
+  }
+
+  .annotation {
+    max-width: 220px;
+  }
+
+  .ann-box {
+    padding: 10px 12px;
+  }
+
+  .ann-box h4 {
+    font-size: 12px;
+  }
+
+  .ann-box p {
+    font-size: 10px;
+  }
+
+  .line-bar {
+    width: 40px;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+   ======================================== */
+@media (max-width: 768px) {
+  .outfit-overlay {
+    padding: 0;
+  }
+
+  .outfit-viewer {
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .close-btn {
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .outfit-header {
+    padding: 20px 20px 15px;
+  }
+
+  .outfit-header h1 {
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+
+  .header-meta {
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .char-name {
+    font-size: 13px;
+  }
+
+  .version-tag {
+    font-size: 9px;
+    padding: 4px 10px;
+  }
+
+  /* Mobile Diagram */
+  .diagram-area {
+    padding: 10px;
+  }
+
+  .outfit-image img {
+    max-height: 350px;
+  }
+
+  /* Mobile Annotations - Stack vertically */
+  .annotation {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    max-width: 100%;
+    flex-direction: row !important;
+  }
+
+  .annotation.left {
+    flex-direction: row !important;
+  }
+
+  .annotation.left .ann-box {
+    text-align: left;
+    border-right: none;
+    border-left: 2px solid var(--accent);
+  }
+
+  .annotation.left .ann-line {
+    flex-direction: row-reverse;
+  }
+
+  .line-bar {
+    width: 25px;
+  }
+
+  .ann-box {
+    padding: 8px 12px;
+    flex: 1;
+  }
+
+  .ann-box h4 {
+    font-size: 11px;
+  }
+
+  .ann-box p {
+    font-size: 9px;
+    margin-bottom: 4px;
+  }
+
+  .ann-dims {
+    font-size: 9px;
+  }
+
+  /* Hide HUD on mobile */
+  .hud-corner,
+  .scan-line {
+    display: none;
+  }
+
+  .outfit-footer {
+    padding: 10px 20px 15px;
+  }
+
+  .outfit-footer p {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+}
+
+/* Mobile Layout - Scrollable annotations below image */
+@media (max-width: 768px) {
+  .diagram-area {
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .outfit-image {
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .outfit-image img {
+    max-height: 300px;
+  }
+
+  .annotation {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .outfit-header h1 {
+    font-size: 18px;
+  }
+
+  .outfit-image img {
+    max-height: 250px;
+  }
+
+  .ann-box h4 {
+    font-size: 10px;
+  }
+}

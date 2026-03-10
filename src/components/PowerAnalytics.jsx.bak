@@ -1,0 +1,260 @@
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import './PowerAnalytics.css';
+
+const PowerAnalytics = ({ character, onClose }) => {
+  const characterData = {
+    'Leon Kennedy': {
+      image: '/images/characters/leon_kennedy_face.png',
+      stats: [
+        { name: 'Combat', value: 85, icon: '⚔️' },
+        { name: 'Accuracy', value: 92, icon: '🎯' },
+        { name: 'Survival', value: 88, icon: '🛡️' },
+        { name: 'Speed', value: 78, icon: '⚡' },
+        { name: 'Intelligence', value: 82, icon: '🧠' }
+      ],
+      skills: [
+        { name: 'Marksmanship', level: 95, color: '#3B82F6' },
+        { name: 'Hand-to-Hand Combat', level: 80, color: '#3B82F6' },
+        { name: 'Tactical Planning', level: 85, color: '#3B82F6' },
+        { name: 'Weapon Mastery', level: 90, color: '#3B82F6' }
+      ],
+      powerLevel: 87,
+      rage: 75,
+      experience: '15+ Years',
+      missions: '200+'
+    },
+    'Jill Valentine': {
+      image: '/images/characters/jill_face.png',
+      stats: [
+        { name: 'Combat', value: 88, icon: '⚔️' },
+        { name: 'Accuracy', value: 90, icon: '🎯' },
+        { name: 'Survival', value: 92, icon: '🛡️' },
+        { name: 'Speed', value: 85, icon: '⚡' },
+        { name: 'Intelligence', value: 87, icon: '🧠' }
+      ],
+      skills: [
+        { name: 'Lock Picking', level: 95, color: '#A855F7' },
+        { name: 'Explosives Expert', level: 88, color: '#A855F7' },
+        { name: 'Stealth Operations', level: 90, color: '#A855F7' },
+        { name: 'Bio-Weapon Knowledge', level: 92, color: '#A855F7' }
+      ],
+      powerLevel: 88,
+      rage: 70,
+      experience: '18+ Years',
+      missions: '250+'
+    },
+    'Albert Wesker': {
+      image: '/images/characters/albert_wesker_face.png',
+      stats: [
+        { name: 'Combat', value: 98, icon: '⚔️' },
+        { name: 'Accuracy', value: 95, icon: '🎯' },
+        { name: 'Survival', value: 99, icon: '🛡️' },
+        { name: 'Speed', value: 97, icon: '⚡' },
+        { name: 'Intelligence', value: 96, icon: '🧠' }
+      ],
+      skills: [
+        { name: 'Superhuman Strength', level: 99, color: '#EF4444' },
+        { name: 'Regeneration', level: 95, color: '#EF4444' },
+        { name: 'Strategic Genius', level: 98, color: '#EF4444' },
+        { name: 'Viral Enhancement', level: 100, color: '#EF4444' }
+      ],
+      powerLevel: 97,
+      rage: 95,
+      experience: '25+ Years',
+      missions: '500+'
+    },
+    'Ada Wong': {
+      image: '/images/characters/ada_wong_face.png',
+      stats: [
+        { name: 'Combat', value: 86, icon: '⚔️' },
+        { name: 'Accuracy', value: 94, icon: '🎯' },
+        { name: 'Survival', value: 89, icon: '🛡️' },
+        { name: 'Speed', value: 91, icon: '⚡' },
+        { name: 'Intelligence', value: 93, icon: '🧠' }
+      ],
+      skills: [
+        { name: 'Espionage', level: 98, color: '#DC2626' },
+        { name: 'Infiltration', level: 95, color: '#DC2626' },
+        { name: 'Deception', level: 96, color: '#DC2626' },
+        { name: 'Acrobatics', level: 92, color: '#DC2626' }
+      ],
+      powerLevel: 90,
+      rage: 65,
+      experience: '20+ Years',
+      missions: '300+'
+    }
+  };
+
+  const data = characterData[character];
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="power-analytics-overlay"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <motion.div
+          className="power-analytics-modal"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.8, opacity: 0 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button className="close-analytics" onClick={onClose}>✕</button>
+          
+          <div className="analytics-header">
+            <h2>POWER ANALYTICS</h2>
+            <p className="character-title">{character}</p>
+          </div>
+
+          <div className="analytics-grid">
+            {/* Character Profile Card */}
+            <div className="analytics-card profile-card">
+              <div className="profile-image-container">
+                <img src={data.image} alt={character} className="profile-img" />
+                <div className="profile-glow" style={{ 
+                  background: `radial-gradient(circle, ${data.skills[0]?.color || '#3B82F6'}60, transparent)` 
+                }}></div>
+              </div>
+              <h3>{character}</h3>
+              <div className="profile-stats">
+                <div className="stat-item">
+                  <span className="stat-label">Experience</span>
+                  <span className="stat-value">{data.experience}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label">Missions</span>
+                  <span className="stat-value">{data.missions}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Power Level Card */}
+            <div className="analytics-card power-level-card">
+              <h3>POWER LEVEL</h3>
+              <div className="power-circle">
+                <svg viewBox="0 0 200 200">
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="80"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.1)"
+                    strokeWidth="20"
+                  />
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="80"
+                    fill="none"
+                    stroke={data.skills[0].color}
+                    strokeWidth="20"
+                    strokeDasharray={`${data.powerLevel * 5.03} ${502.4 - data.powerLevel * 5.03}`}
+                    strokeLinecap="round"
+                    transform="rotate(-90 100 100)"
+                  />
+                </svg>
+                <div className="power-text">
+                  <span className="power-number">{data.powerLevel}</span>
+                  <span className="power-label">POWER</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Stats Card */}
+            <div className="analytics-card stats-card">
+              <h3>COMBAT STATS</h3>
+              <div className="stats-list">
+                {data.stats.map((stat, index) => (
+                  <div key={index} className="stat-row">
+                    <span className="stat-icon">{stat.icon}</span>
+                    <span className="stat-name">{stat.name}</span>
+                    <div className="stat-bar">
+                      <motion.div
+                        className="stat-fill"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${stat.value}%` }}
+                        transition={{ delay: index * 0.1, duration: 0.8 }}
+                        style={{ background: data.skills[0].color }}
+                      />
+                    </div>
+                    <span className="stat-number">{stat.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Skills Card */}
+            <div className="analytics-card skills-card">
+              <h3>SPECIAL SKILLS</h3>
+              <div className="skills-list">
+                {data.skills.map((skill, index) => (
+                  <div key={index} className="skill-item">
+                    <div className="skill-header">
+                      <span className="skill-name">{skill.name}</span>
+                      <span className="skill-level">{skill.level}%</span>
+                    </div>
+                    <div className="skill-bar">
+                      <motion.div
+                        className="skill-fill"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${skill.level}%` }}
+                        transition={{ delay: index * 0.15, duration: 0.8 }}
+                        style={{ background: skill.color }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Rage Meter Card */}
+            <div className="analytics-card rage-card">
+              <h3>RAGE METER</h3>
+              <div className="rage-container">
+                <div className="rage-bar-vertical">
+                  <motion.div
+                    className="rage-fill-vertical"
+                    initial={{ height: 0 }}
+                    animate={{ height: `${data.rage}%` }}
+                    transition={{ duration: 1 }}
+                    style={{ background: `linear-gradient(to top, ${data.skills[0].color}, #ff0000)` }}
+                  />
+                </div>
+                <div className="rage-info">
+                  <span className="rage-value">{data.rage}%</span>
+                  <span className="rage-label">RAGE POWER</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Performance Chart */}
+            <div className="analytics-card chart-card">
+              <h3>PERFORMANCE CHART</h3>
+              <div className="chart-container">
+                {data.stats.map((stat, index) => (
+                  <div key={index} className="chart-bar">
+                    <motion.div
+                      className="chart-fill"
+                      initial={{ height: 0 }}
+                      animate={{ height: `${stat.value}%` }}
+                      transition={{ delay: index * 0.1, duration: 0.8 }}
+                      style={{ background: data.skills[0].color }}
+                    />
+                    <span className="chart-label">{stat.name.substring(0, 3)}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+export default PowerAnalytics;

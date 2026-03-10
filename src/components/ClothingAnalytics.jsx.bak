@@ -1,0 +1,404 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import './ClothingAnalytics.css';
+
+const ClothingAnalytics = ({ character, onClose }) => {
+  const [selectedOutfit, setSelectedOutfit] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('all');
+
+  // Character clothing data with dimensions
+  const characterClothingData = {
+    'Leon Kennedy': {
+      version: 'Resident Evil 9',
+      image: '/images/characters/leon_kennedy_face.png',
+      color: '#FF1493',
+      outfits: [
+        {
+          id: 1,
+          name: 'RPD Tactical Jacket',
+          category: 'jacket',
+          image: '/images/outfits/leon_jacket_re9.png',
+          dimensions: {
+            chest: '42"',
+            shoulders: '18"',
+            length: '28"',
+            sleeves: '25"'
+          },
+          description: 'Official RPD tactical jacket with reinforced shoulders',
+          version: 'RE9'
+        },
+        {
+          id: 2,
+          name: 'Combat Boots',
+          category: 'footwear',
+          image: '/images/outfits/leon_boots_re9.png',
+          dimensions: {
+            size: 'US 10',
+            height: '8"',
+            width: 'D'
+          },
+          description: 'Military-grade combat boots with steel toe',
+          version: 'RE9'
+        },
+        {
+          id: 3,
+          name: 'Tactical Vest',
+          category: 'vest',
+          image: '/images/outfits/leon_vest_re9.png',
+          dimensions: {
+            chest: '40-44"',
+            length: '22"',
+            pockets: '6'
+          },
+          description: 'Kevlar-reinforced tactical vest with multiple pouches',
+          version: 'RE9'
+        },
+        {
+          id: 4,
+          name: 'Cargo Pants',
+          category: 'pants',
+          image: '/images/outfits/leon_pants_re9.png',
+          dimensions: {
+            waist: '32"',
+            inseam: '32"',
+            pockets: '8'
+          },
+          description: 'Tactical cargo pants with reinforced knees',
+          version: 'RE9'
+        },
+        {
+          id: 5,
+          name: 'Leather Gloves',
+          category: 'accessories',
+          image: '/images/outfits/leon_gloves_re9.png',
+          dimensions: {
+            size: 'L',
+            material: 'Leather',
+            grip: 'Enhanced'
+          },
+          description: 'Tactical leather gloves with grip enhancement',
+          version: 'RE9'
+        }
+      ]
+    },
+    'Jill Valentine': {
+      version: 'Classic',
+      image: '/images/characters/jill_face.png',
+      color: '#A855F7',
+      outfits: [
+        {
+          id: 1,
+          name: 'STARS Uniform Top',
+          category: 'jacket',
+          image: '/images/outfits/jill_top.png',
+          dimensions: {
+            chest: '36"',
+            shoulders: '15"',
+            length: '24"',
+            sleeves: '22"'
+          },
+          description: 'Official STARS tactical uniform top'
+        },
+        {
+          id: 2,
+          name: 'Combat Boots',
+          category: 'footwear',
+          image: '/images/outfits/jill_boots.png',
+          dimensions: {
+            size: 'US 7',
+            height: '6"',
+            width: 'B'
+          },
+          description: 'Lightweight tactical boots'
+        },
+        {
+          id: 3,
+          name: 'Tactical Beret',
+          category: 'accessories',
+          image: '/images/outfits/jill_beret.png',
+          dimensions: {
+            size: 'M',
+            material: 'Wool',
+            color: 'Navy Blue'
+          },
+          description: 'STARS official beret'
+        },
+        {
+          id: 4,
+          name: 'Utility Belt',
+          category: 'accessories',
+          image: '/images/outfits/jill_belt.png',
+          dimensions: {
+            waist: '28-32"',
+            pouches: '4',
+            holster: 'Yes'
+          },
+          description: 'Multi-purpose utility belt with holster'
+        }
+      ]
+    },
+    'Albert Wesker': {
+      version: 'Classic',
+      image: '/images/characters/albert_wesker_face.png',
+      color: '#EF4444',
+      outfits: [
+        {
+          id: 1,
+          name: 'Black Trench Coat',
+          category: 'jacket',
+          image: '/images/outfits/wesker_coat.png',
+          dimensions: {
+            chest: '44"',
+            shoulders: '19"',
+            length: '48"',
+            sleeves: '26"'
+          },
+          description: 'Signature black leather trench coat'
+        },
+        {
+          id: 2,
+          name: 'Tactical Sunglasses',
+          category: 'accessories',
+          image: '/images/outfits/wesker_glasses.png',
+          dimensions: {
+            lens: 'UV400',
+            frame: 'Titanium',
+            style: 'Wraparound'
+          },
+          description: 'Signature tactical sunglasses'
+        },
+        {
+          id: 3,
+          name: 'Combat Suit',
+          category: 'vest',
+          image: '/images/outfits/wesker_suit.png',
+          dimensions: {
+            chest: '42"',
+            length: '30"',
+            material: 'Kevlar'
+          },
+          description: 'Enhanced combat bodysuit'
+        },
+        {
+          id: 4,
+          name: 'Tactical Boots',
+          category: 'footwear',
+          image: '/images/outfits/wesker_boots.png',
+          dimensions: {
+            size: 'US 11',
+            height: '10"',
+            width: 'D'
+          },
+          description: 'High-performance tactical boots'
+        }
+      ]
+    },
+    'Ada Wong': {
+      version: 'Classic',
+      image: '/images/characters/ada_wong_face.png',
+      color: '#DC2626',
+      outfits: [
+        {
+          id: 1,
+          name: 'Red Dress',
+          category: 'jacket',
+          image: '/images/outfits/ada_dress.png',
+          dimensions: {
+            bust: '34"',
+            waist: '26"',
+            length: '36"',
+            material: 'Silk'
+          },
+          description: 'Signature red evening dress'
+        },
+        {
+          id: 2,
+          name: 'High Heels',
+          category: 'footwear',
+          image: '/images/outfits/ada_heels.png',
+          dimensions: {
+            size: 'US 7',
+            heel: '3"',
+            style: 'Stiletto'
+          },
+          description: 'Elegant high heel shoes'
+        },
+        {
+          id: 3,
+          name: 'Spy Coat',
+          category: 'jacket',
+          image: '/images/outfits/ada_coat.png',
+          dimensions: {
+            chest: '36"',
+            shoulders: '15"',
+            length: '32"',
+            sleeves: '23"'
+          },
+          description: 'Tactical spy trench coat'
+        },
+        {
+          id: 4,
+          name: 'Grappling Hook Belt',
+          category: 'accessories',
+          image: '/images/outfits/ada_belt.png',
+          dimensions: {
+            waist: '26-30"',
+            range: '50m',
+            weight: '2.5kg'
+          },
+          description: 'Custom grappling hook utility belt'
+        }
+      ]
+    }
+  };
+
+  const categories = [
+    { id: 'all', name: 'All', icon: '👔' },
+    { id: 'jacket', name: 'Jackets', icon: '🧥' },
+    { id: 'vest', name: 'Vests', icon: '🦺' },
+    { id: 'pants', name: 'Pants', icon: '👖' },
+    { id: 'footwear', name: 'Footwear', icon: '👢' },
+    { id: 'accessories', name: 'Accessories', icon: '🧤' }
+  ];
+
+  const data = characterClothingData[character];
+  
+  if (!data) return null;
+
+  const filteredOutfits = activeCategory === 'all' 
+    ? data.outfits 
+    : data.outfits.filter(outfit => outfit.category === activeCategory);
+
+  const isLeon = character === 'Leon Kennedy';
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="clothing-analytics-overlay"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <motion.div
+          className="clothing-analytics-modal"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.8, opacity: 0 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button className="close-clothing-analytics" onClick={onClose}>✕</button>
+          
+          {/* Header */}
+          <div className="clothing-header">
+            <div className="clothing-header-content">
+              <div className="character-badge" style={{ borderColor: data.color }}>
+                <img src={data.image} alt={character} />
+                <div className="badge-glow" style={{ background: data.color }}></div>
+              </div>
+              <div className="header-text">
+                <h2>CLOTHING ANALYTICS</h2>
+                <p className="character-name">{character}</p>
+                {isLeon && (
+                  <span className="version-badge re9">VERSION RE9</span>
+                )}
+                {!isLeon && (
+                  <span className="version-badge">{data.version}</span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Category Filter */}
+          <div className="category-filter">
+            {categories.map(cat => (
+              <button
+                key={cat.id}
+                className={`category-btn ${activeCategory === cat.id ? 'active' : ''}`}
+                onClick={() => setActiveCategory(cat.id)}
+                style={activeCategory === cat.id ? { borderColor: data.color, color: data.color } : {}}
+              >
+                <span className="cat-icon">{cat.icon}</span>
+                <span className="cat-name">{cat.name}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Outfits Grid */}
+          <div className="outfits-grid">
+            {filteredOutfits.map((outfit, index) => (
+              <motion.div
+                key={outfit.id}
+                className={`outfit-card ${selectedOutfit === outfit.id ? 'selected' : ''}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                onClick={() => setSelectedOutfit(selectedOutfit === outfit.id ? null : outfit.id)}
+                style={{ '--accent-color': data.color }}
+              >
+                <div className="outfit-image-container">
+                  <div className="outfit-image-placeholder" style={{ background: `linear-gradient(135deg, ${data.color}20, ${data.color}40)` }}>
+                    <span className="outfit-icon">
+                      {outfit.category === 'jacket' && '🧥'}
+                      {outfit.category === 'vest' && '🦺'}
+                      {outfit.category === 'pants' && '👖'}
+                      {outfit.category === 'footwear' && '👢'}
+                      {outfit.category === 'accessories' && '🧤'}
+                    </span>
+                  </div>
+                  <div className="outfit-glow" style={{ background: data.color }}></div>
+                </div>
+                
+                <div className="outfit-info">
+                  <h3 className="outfit-name">{outfit.name}</h3>
+                  {isLeon && outfit.version && (
+                    <span className="outfit-version">Version {outfit.version}</span>
+                  )}
+                  <p className="outfit-description">{outfit.description}</p>
+                </div>
+
+                {/* Dimensions Panel */}
+                <motion.div 
+                  className="dimensions-panel"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ 
+                    height: selectedOutfit === outfit.id ? 'auto' : 0,
+                    opacity: selectedOutfit === outfit.id ? 1 : 0
+                  }}
+                >
+                  <h4>DIMENSIONS</h4>
+                  <div className="dimensions-grid">
+                    {Object.entries(outfit.dimensions).map(([key, value]) => (
+                      <div key={key} className="dimension-item">
+                        <span className="dim-label">{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                        <span className="dim-value" style={{ color: data.color }}>{value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Footer Stats */}
+          <div className="clothing-footer">
+            <div className="footer-stat">
+              <span className="footer-value">{data.outfits.length}</span>
+              <span className="footer-label">Total Items</span>
+            </div>
+            <div className="footer-stat">
+              <span className="footer-value">{new Set(data.outfits.map(o => o.category)).size}</span>
+              <span className="footer-label">Categories</span>
+            </div>
+            <div className="footer-stat">
+              <span className="footer-value" style={{ color: data.color }}>{isLeon ? 'RE9' : data.version}</span>
+              <span className="footer-label">Version</span>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+export default ClothingAnalytics;
