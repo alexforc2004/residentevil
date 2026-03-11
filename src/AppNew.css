@@ -91,6 +91,19 @@
   z-index: 1;
 }
 
+.animated-gradient {
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
 /* Diagonal Geometric Shape */
 .diagonal-shape {
   position: absolute;
@@ -152,7 +165,7 @@
 .character-name {
   font-size: 90px;
   font-weight: 900;
-  line-height: 0.9;
+  line-height: 0.85;
   margin-bottom: 30px;
   text-transform: uppercase;
   letter-spacing: -2px;
@@ -218,16 +231,18 @@
   border-color: #fff;
 }
 
-/* Right Content - Character in Center */
+/* Right Content - Character on Right */
 .right-content {
   position: absolute;
-  left: 50%;
+  right: 5%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   z-index: 5;
+  max-width: 50vw;
+  max-height: 90vh;
 }
 
 .character-image-container {
@@ -235,12 +250,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .character-img {
   width: auto;
   height: 85vh;
-  max-width: 90vw;
+  max-width: 55vw;
   object-fit: contain;
   filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.7));
   cursor: pointer;
@@ -322,43 +339,68 @@
 /* Responsive */
 @media (max-width: 1024px) {
   .content-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     padding: 60px 40px;
+    justify-content: flex-start;
   }
 
   .character-name {
     font-size: 70px;
   }
+  
+  .left-content {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .rating-badge {
+    align-self: center;
+  }
 
   .right-content {
     position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
     width: 100%;
+    max-width: 100%;
     height: 400px;
     margin-top: 40px;
   }
   
   .character-img {
-    height: 100%;
+    height: 400px;
+    max-width: 80vw;
     width: auto;
+  }
+  
+  .weapon-panel {
+    bottom: 20px;
+    right: 20px;
+    min-width: 250px;
   }
 }
 
 @media (max-width: 768px) {
   .content-grid {
     padding: 40px 20px;
+    padding-bottom: 100px;
   }
   
   .character-name {
     font-size: 48px;
   }
   
-  .character-description {
+  .character-desc {
     font-size: 14px;
+    text-align: center;
   }
 
   .action-buttons {
     flex-direction: column;
     gap: 15px;
+    width: 100%;
   }
 
   .btn-primary,
@@ -368,8 +410,27 @@
   }
   
   .right-content {
-    height: 300px;
+    height: 350px;
     margin-top: 30px;
+  }
+  
+  .character-img {
+    height: 350px;
+    max-width: 90vw;
+  }
+  
+  .weapon-panel {
+    position: fixed;
+    bottom: 80px;
+    right: 15px;
+    left: 15px;
+    min-width: auto;
+    padding: 15px;
+  }
+  
+  .weapon-info {
+    flex-direction: column;
+    text-align: center;
   }
   
   .slide-counter {
@@ -405,18 +466,20 @@
 @media (max-width: 480px) {
   .content-grid {
     padding: 30px 15px;
+    padding-bottom: 120px;
   }
   
   .character-name {
     font-size: 36px;
   }
   
-  .character-description {
+  .character-desc {
     font-size: 13px;
   }
   
   .rating-badge {
-    font-size: 12px;
+    font-size: 11px;
+    padding: 6px 12px;
   }
   
   .btn-primary, .btn-secondary {
@@ -425,7 +488,35 @@
   }
   
   .right-content {
-    height: 250px;
+    height: 280px;
+    margin-top: 20px;
+  }
+  
+  .character-img {
+    height: 280px;
+    max-width: 95vw;
+  }
+  
+  .weapon-panel {
+    bottom: 70px;
+    padding: 12px;
+  }
+  
+  .weapon-panel h3 {
+    font-size: 10px;
+  }
+  
+  .weapon-info img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .weapon-info h4 {
+    font-size: 14px;
+  }
+  
+  .weapon-info p {
+    font-size: 12px;
   }
   
   .slide-counter {
@@ -434,5 +525,29 @@
   
   .slide-counter .current {
     font-size: 20px;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 375px) {
+  .character-name {
+    font-size: 32px;
+  }
+  
+  .character-desc {
+    font-size: 12px;
+  }
+  
+  .right-content {
+    height: 240px;
+  }
+  
+  .character-img {
+    height: 240px;
+  }
+  
+  .btn-primary, .btn-secondary {
+    font-size: 11px;
+    padding: 10px 20px;
   }
 }

@@ -8,6 +8,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import BodyPartViewer from './components/BodyPartViewer'
 import ClothingAnalytics from './components/ClothingAnalytics'
+import CharacterPortfolio from './components/CharacterPortfolio'
 import './AppNew.css'
 
 // Background music
@@ -91,6 +92,8 @@ function AppNew() {
   const [showWeapon, setShowWeapon] = useState(false)
   const [showClothingAnalytics, setShowClothingAnalytics] = useState(false)
   const [analyticsCharacter, setAnalyticsCharacter] = useState(null)
+  const [showPortfolio, setShowPortfolio] = useState(false)
+  const [portfolioCharacter, setPortfolioCharacter] = useState(null)
   const swiperRef = useRef(null)
 
   const toggleMute = () => {
@@ -116,6 +119,16 @@ function AppNew() {
   const handleCloseClothingAnalytics = () => {
     setShowClothingAnalytics(false)
     setAnalyticsCharacter(null)
+  }
+
+  const handleOpenPortfolio = (character) => {
+    setPortfolioCharacter(character)
+    setShowPortfolio(true)
+  }
+
+  const handleClosePortfolio = () => {
+    setShowPortfolio(false)
+    setPortfolioCharacter(null)
   }
 
   // Play background music on mount
@@ -167,11 +180,11 @@ function AppNew() {
               }}
             >
               {/* Background with character color */}
-              <div className="slide-bg" style={{ backgroundColor: '#1a1a1a' }}>
+              <div className="slide-bg" style={{ backgroundColor: '#000000' }}>
                 <div 
-                  className="color-overlay"
+                  className="color-overlay animated-gradient"
                   style={{
-                    background: `linear-gradient(135deg, ${character.color}20 0%, transparent 70%)`
+                    background: `radial-gradient(ellipse at top left, ${character.color}40 0%, ${character.color}20 30%, #000000 60%, #000000 100%)`
                   }}
                 />
               </div>
@@ -179,7 +192,10 @@ function AppNew() {
               {/* Diagonal Geometric Shape */}
               <div 
                 className="diagonal-shape"
-                style={{ backgroundColor: character.color }}
+                style={{ 
+                  background: `linear-gradient(135deg, ${character.color}15, transparent)`,
+                  opacity: 0.4
+                }}
               />
 
               {/* Content Grid */}
@@ -294,6 +310,16 @@ function AppNew() {
           <ClothingAnalytics
             character={analyticsCharacter}
             onClose={handleCloseClothingAnalytics}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Character Portfolio Modal */}
+      <AnimatePresence>
+        {showPortfolio && portfolioCharacter && (
+          <CharacterPortfolio
+            character={portfolioCharacter}
+            onClose={handleClosePortfolio}
           />
         )}
       </AnimatePresence>

@@ -332,22 +332,81 @@
 /* ========================================
    RESPONSIVE - TABLET
    ======================================== */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .outfit-viewer {
     max-width: 95%;
+    max-height: 95vh;
+  }
+
+  .outfit-header h1 {
+    font-size: 32px;
+    letter-spacing: 3px;
   }
 
   .items-container {
-    padding: 25px;
+    padding: 30px 25px;
   }
 
   .items-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
   }
 
   .item-card {
     padding: 20px;
+    max-width: 100%;
+  }
+
+  .item-image {
+    height: 180px;
+  }
+
+  .item-image img {
+    max-height: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .outfit-viewer {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 12px;
+  }
+
+  .outfit-header {
+    padding: 25px 20px 15px;
+  }
+
+  .outfit-header h1 {
+    font-size: 26px;
+    letter-spacing: 2px;
+  }
+
+  .header-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .char-name {
+    font-size: 14px;
+  }
+
+  .version-tag {
+    font-size: 10px;
+    padding: 4px 12px;
+  }
+
+  .items-container {
+    padding: 20px 15px;
+  }
+
+  .items-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .item-card {
+    padding: 18px;
   }
 
   .item-image {
@@ -357,6 +416,22 @@
   .item-image img {
     max-height: 140px;
   }
+
+  .item-info h3 {
+    font-size: 15px;
+  }
+
+  .detail-label {
+    font-size: 11px;
+  }
+
+  .detail-value {
+    font-size: 12px;
+  }
+
+  .detail-value.price {
+    font-size: 15px;
+  }
 }
 
 /* ========================================
@@ -364,39 +439,40 @@
    ======================================== */
 @media (max-width: 600px) {
   .outfit-overlay {
-    padding: 0;
+    padding: 10px;
   }
 
   .outfit-viewer {
     max-width: 100%;
     max-height: 100vh;
-    border-radius: 0;
+    border-radius: 16px;
   }
 
   .close-btn {
-    top: 15px;
-    right: 15px;
-    width: 38px;
-    height: 38px;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
     font-size: 16px;
   }
 
   .outfit-header {
-    padding: 20px 20px 15px;
+    padding: 20px 15px 12px;
   }
 
   .outfit-header h1 {
-    font-size: 22px;
-    letter-spacing: 2px;
+    font-size: 20px;
+    letter-spacing: 1.5px;
   }
 
   .header-meta {
-    gap: 12px;
+    flex-direction: column;
+    gap: 8px;
     margin-top: 8px;
   }
 
   .char-name {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .version-tag {
@@ -405,7 +481,7 @@
   }
 
   .items-container {
-    padding: 15px;
+    padding: 15px 12px;
   }
 
   .items-grid {
@@ -419,35 +495,158 @@
   }
 
   .item-image {
-    height: 180px;
+    height: 160px;
   }
 
   .item-image img {
-    max-height: 160px;
+    max-height: 140px;
   }
 
   .item-info h3 {
     font-size: 14px;
+    margin-bottom: 12px;
   }
 
-  .item-info p {
-    font-size: 12px;
+  .detail-row {
+    gap: 8px;
   }
 
-  .item-dims {
+  .detail-label {
+    font-size: 10px;
+  }
+
+  .detail-value {
     font-size: 11px;
   }
 
-  .hud-corner {
-    display: none;
+  .detail-value.price {
+    font-size: 14px;
   }
 
+  .detail-value.store {
+    font-size: 10px;
+  }
+
+  .hud-corner {
+    width: 20px;
+    height: 20px;
+  }
+
+  .hud-corner.tl, .hud-corner.tr { top: 10px; }
+  .hud-corner.bl, .hud-corner.br { bottom: 10px; }
+  .hud-corner.tl, .hud-corner.bl { left: 10px; }
+  .hud-corner.tr, .hud-corner.br { right: 10px; }
+
   .outfit-footer {
-    padding: 12px 20px 20px;
+    padding: 10px 15px 15px;
   }
 
   .outfit-footer p {
     font-size: 9px;
     letter-spacing: 2px;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 480px) {
+  .outfit-overlay {
+    padding: 5px;
+  }
+
+  .outfit-viewer {
+    border-radius: 12px;
+  }
+
+  .outfit-header h1 {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .char-name {
+    font-size: 11px;
+  }
+
+  .version-tag {
+    font-size: 8px;
+    padding: 3px 8px;
+  }
+
+  .items-container {
+    padding: 12px 10px;
+  }
+
+  .items-grid {
+    gap: 12px;
+  }
+
+  .item-card {
+    padding: 12px;
+  }
+
+  .item-image {
+    height: 140px;
+  }
+
+  .item-image img {
+    max-height: 120px;
+  }
+
+  .item-info h3 {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .detail-label {
+    font-size: 9px;
+  }
+
+  .detail-value {
+    font-size: 10px;
+  }
+
+  .detail-value.price {
+    font-size: 13px;
+  }
+
+  .re9-badge {
+    font-size: 8px;
+    padding: 3px 8px;
+  }
+
+  .close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+}
+
+/* Very Small Mobile */
+@media (max-width: 375px) {
+  .outfit-header h1 {
+    font-size: 16px;
+  }
+
+  .item-image {
+    height: 120px;
+  }
+
+  .item-image img {
+    max-height: 100px;
+  }
+
+  .item-info h3 {
+    font-size: 12px;
+  }
+
+  .detail-label {
+    font-size: 8px;
+  }
+
+  .detail-value {
+    font-size: 9px;
+  }
+
+  .detail-value.price {
+    font-size: 12px;
   }
 }
