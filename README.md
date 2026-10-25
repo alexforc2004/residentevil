@@ -4,12 +4,12 @@ A modern React website featuring Resident Evil characters with stunning animatio
 
 ## Features
 
-- 🎮 **4 Characters**: Leon Kennedy, Jill Valentine, Albert Wesker, Ada Wong
-- ✨ **Three.js**: 3D particle background with floating orbs
-- 🎨 **GSAP**: Text reveal animations with letter-by-letter effects
-- 📱 **Framer Motion**: Smooth page transitions and hover effects
-- 🌙 **Dark Theme**: Red/pink accent colors matching Resident Evil aesthetic
-- ⌨️ **Keyboard Navigation**: Use arrow keys to switch characters
+- **4 Characters**: Leon Kennedy, Jill Valentine, Albert Wesker, Ada Wong
+-**Three.js**: 3D particle background with floating orbs
+- **GSAP**: Text reveal animations with letter-by-letter effects
+- Framer Motion**: Smooth page transitions and hover effects
+- *Dark Theme**: Red/pink accent colors matching Resident Evil aesthetic
+- **Keyboard Navigation**: Use arrow keys to switch characters
 
 ## Tech Stack
 
